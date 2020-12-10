@@ -1,0 +1,91 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	int n,k,t,m = 0,a[10000],sum = 0,diff;
+	cin>>t;
+	while(t-- > 0)
+	{
+	    cin>>n>>k;
+	    for(int i = 1; i<=n; i++)
+	    {
+	        if(n % 2 == 0)
+	        {
+	            if(i % 2 != 0)
+	            {
+	                a[i - 1] = -i;
+	            }
+	            if(i % 2 == 0)
+	            {
+	                a[i-1] = i;
+	                m++;
+	            }
+	        }
+	        if(n % 2 != 0)
+	        {
+	            if(i % 2 != 0)
+	            {
+	                a[i-1] = i;
+	                m++;
+	            }
+	            if(i % 2 == 0)
+	            {
+	                a[i-1] = -i;
+	            }
+	        }
+	        
+	    }
+	    for(int j = 0; j < n; j++)
+	    {
+	        sum = sum + a[j];
+	        if(sum > 0)
+	        {
+	            if(m < k)
+	            {
+	                diff = k - m;
+	                for(int l = 0; l < n; l++)
+	                {
+	                    if(a[n - 1 - l] < 0)
+	                    {
+	                        a[n - l - 1] = (n-l);
+	                        diff--;
+	                        m++;
+	                    }
+	                    if(diff == 0)
+	                      break;
+	                }
+	            }
+	            else if(m > k)
+	            {
+	                diff = m - k;
+	                
+	                for(int l = 0; l < n; l++)
+	                {
+	                    if(a[n - 1- l] > 0)
+	                     {
+	                         a[n-l-1] = -1 * (n - l);
+	                         diff--;
+	                         m--;
+	                     }
+	                     if(diff == 0)
+	                     break;
+	                }
+	            }
+	            else if(m == k)
+	            {
+	                break;
+	                 
+	            }
+	        }
+	    }
+	    for(int c = 0; c < n; c++)
+	    {
+	        cout << a[c] << " ";
+	    }
+	    printf("\n");
+	    m = 0;
+	    sum = 0;
+	    diff = 0;
+	}
+	return 0;
+}
